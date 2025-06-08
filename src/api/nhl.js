@@ -14,13 +14,29 @@ const baseURL = import.meta.env.DEV
 const api = axios.create({
   baseURL: baseURL,
   params: { api_key: API_KEY },
+  timeout: 10000, // 10 second timeout
+  headers: {
+    'Accept': 'application/json',
+    'User-Agent': 'StatsJam/1.0'
+  }
 });
 
 // Add response interceptor to handle common errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 429) {
+    console.error('API Request Failed:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      message: error.message,
+      code: error.code
+    });
+    
+    if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT') {
+      console.warn('Network connectivity issue detected');
+      error.message = 'Network connection failed. Please check your internet connection and try again.';
+    } else if (error.response?.status === 429) {
       console.warn('Rate limit exceeded. Please wait before making more requests.');
       error.message = 'Rate limit exceeded. Please wait and try again.';
     } else if (error.response?.status === 403) {
@@ -29,6 +45,9 @@ api.interceptors.response.use(
     } else if (error.response?.status === 404) {
       console.warn('Resource not found:', error.config?.url);
       error.message = 'Resource not found.';
+    } else if (error.response?.status === 500) {
+      console.warn('Server error:', error.config?.url);
+      error.message = 'Server error. Please try again later.';
     }
     return Promise.reject(error);
   }
@@ -50,70 +69,167 @@ export const testAPI = () => {
     });
 };
 
+// Mock data for development when API is unavailable
+const mockTeams = [
+  {
+    id: "583ec825-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Rangers",
+    market: "New York",
+    alias: "NYR",
+    conference: { name: "Eastern Conference" },
+    division: { name: "Metropolitan" }
+  },
+  {
+    id: "583ec773-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Bruins", 
+    market: "Boston",
+    alias: "BOS",
+    conference: { name: "Eastern Conference" },
+    division: { name: "Atlantic" }
+  },
+  {
+    id: "583ec5fd-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Maple Leafs",
+    market: "Toronto", 
+    alias: "TOR",
+    conference: { name: "Eastern Conference" },
+    division: { name: "Atlantic" }
+  },
+  {
+    id: "583ec50e-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Lightning",
+    market: "Tampa Bay",
+    alias: "TBL", 
+    conference: { name: "Eastern Conference" },
+    division: { name: "Atlantic" }
+  },
+  {
+    id: "583ec87d-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Oilers",
+    market: "Edmonton",
+    alias: "EDM",
+    conference: { name: "Western Conference" }, 
+    division: { name: "Pacific" }
+  },
+  {
+    id: "583ec928-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Kings",
+    market: "Los Angeles",
+    alias: "LAK",
+    conference: { name: "Western Conference" },
+    division: { name: "Pacific" }
+  },
+  {
+    id: "583ec8d4-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Avalanche", 
+    market: "Colorado",
+    alias: "COL",
+    conference: { name: "Western Conference" },
+    division: { name: "Central" }
+  },
+  {
+    id: "583ec56e-fb46-11e1-82cb-f4ce4684ea4c",
+    name: "Blackhawks",
+    market: "Chicago", 
+    alias: "CHI",
+    conference: { name: "Western Conference" },
+    division: { name: "Central" }
+  }
+];
+
 // Fetch all teams (filter out non-NHL teams like national teams)
-export const getTeams = () =>
-  api.get('/league/teams.json')
-    .then((res) => {
-      console.log('API Response:', res);
-      console.log('Raw teams data:', res.data.teams);
-      
-      // Log team structure to understand the data
-      if (res.data.teams && res.data.teams.length > 0) {
-        console.log('Sample team structure:', res.data.teams[0]);
+export const getTeams = async () => {
+  console.log('🏒 Fetching NHL teams...');
+  
+  try {
+    const response = await api.get('/league/teams.json');
+    console.log('✅ API Response received:', response.status);
+    console.log('🔍 Raw teams data:', response.data.teams);
+    
+    // Log team structure to understand the data
+    if (response.data.teams && response.data.teams.length > 0) {
+      console.log('📊 Sample team structure:', response.data.teams[0]);
+    }
+    
+    // Filter out non-NHL teams based on known patterns
+    const nhlTeams = response.data.teams.filter(team => {
+      // Filter out national teams
+      const nationalTeams = ['Team Canada', 'Team Finland', 'Team Sweden', 'Team USA', 'Team Czech Republic'];
+      if (nationalTeams.includes(`${team.market} ${team.name}`) || 
+          ['Canada', 'Finland', 'Sweden', 'USA'].includes(team.name)) {
+        return false;
       }
       
-      // Filter out non-NHL teams based on known patterns
-      const nhlTeams = res.data.teams.filter(team => {
-        // Filter out national teams
-        const nationalTeams = ['Team Canada', 'Team Finland', 'Team Sweden', 'Team USA', 'Team Czech Republic'];
-        if (nationalTeams.includes(`${team.market} ${team.name}`) || 
-            ['Canada', 'Finland', 'Sweden', 'USA'].includes(team.name)) {
-          return false;
-        }
-        
-        // Filter out division entries
-        if (team.name === 'Division') {
-          return false;
-        }
-        
-        // Filter out special team entries (Hughes, MacKinnon, Matthews, McDavid, TBD)
-        const specialTeams = ['Hughes', 'MacKinnon', 'Matthews', 'McDavid', 'TBD'];
-        if (specialTeams.includes(team.name)) {
-          return false;
-        }
-        
-        // Filter out European teams
-        const europeanTeams = ['EHC Red Bull Munchen', 'Eisbaren Berlin', 'SC Bern'];
-        if (europeanTeams.includes(team.name)) {
-          return false;
-        }
-        
-        // Keep teams that look like NHL teams (have proper market and name)
-        return team.market && team.name && team.alias;
-      });
+      // Filter out division entries
+      if (team.name === 'Division') {
+        return false;
+      }
       
-      const mappedTeams = nhlTeams.map((t) => ({
+      // Filter out special team entries (Hughes, MacKinnon, Matthews, McDavid, TBD)
+      const specialTeams = ['Hughes', 'MacKinnon', 'Matthews', 'McDavid', 'TBD'];
+      if (specialTeams.includes(team.name)) {
+        return false;
+      }
+      
+      // Filter out European teams
+      const europeanTeams = ['EHC Red Bull Munchen', 'Eisbaren Berlin', 'SC Bern'];
+      if (europeanTeams.includes(team.name)) {
+        return false;
+      }
+      
+      // Keep teams that look like NHL teams (have proper market and name)
+      return team.market && team.name && team.alias;
+    });
+    
+    const mappedTeams = nhlTeams.map((t) => {
+      let standardizedConferenceName = null;
+      if (t.conference && t.conference.name) {
+        const apiConfNameLower = t.conference.name.toLowerCase();
+        if (apiConfNameLower.includes('eastern')) {
+          standardizedConferenceName = 'Eastern Conference';
+        } else if (apiConfNameLower.includes('western')) {
+          standardizedConferenceName = 'Western Conference';
+        } else {
+          standardizedConferenceName = t.conference.name; // Keep original if not Eastern/Western
+        }
+      }
+
+      const divisionObject = t.division ? { name: t.division.name } : null;
+
+      return {
         id: t.id,
         name: t.name,
         market: t.market,
         alias: t.alias,
-        conference: t.conference || null,
-        division: t.division || null,
-      }));
-      
-      console.log('Filtered NHL teams:', mappedTeams);
-      console.log('Team count:', mappedTeams.length);
-      return mappedTeams;
-    })
-    .catch((error) => {
-      console.error('API Error Details:', {
-        message: error.message,
-        response: error.response,
-        request: error.request,
-        config: error.config
-      });
-      throw error;
+        conference: standardizedConferenceName ? { name: standardizedConferenceName } : null,
+        division: divisionObject,
+      };
     });
+    
+    console.log('🏆 Filtered NHL teams:', mappedTeams);
+    console.log('📈 Team count:', mappedTeams.length);
+    return mappedTeams;
+    
+  } catch (error) {
+    console.error('❌ API Error Details:', {
+      message: error.message,
+      response: error.response,
+      request: error.request,
+      config: error.config
+    });
+    
+    // Check if it's a network error and we're in development
+    if ((error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED' || 
+         error.code === 'ETIMEDOUT' || error.message.includes('network') || 
+         error.message.includes('TLS')) && import.meta.env.DEV) {
+      console.warn('🚨 API unavailable, using mock data for development');
+      console.log('🎭 Mock teams loaded:', mockTeams.length);
+      return mockTeams;
+    }
+    
+    throw error;
+  }
+};
 
 // Fetch team roster
 export const getTeamRoster = (teamId) =>
@@ -132,58 +248,58 @@ export const getPlayer = (playerId) =>
   api.get(`/players/${playerId}/profile.json`).then((res) => res.data);
 
 // Fetch player season statistics
-export const getPlayerStats = async (playerId) => {
-  console.log('Fetching player stats for:', playerId);
-  
+export const getPlayerStats = async (playerId, seasonType = 'REG') => {
+  console.log(`Fetching player stats for: ${playerId}, season type: ${seasonType}`);
+
   try {
-    // Get player profile which contains comprehensive statistics
-    console.log('Fetching player profile for statistics...');
     const response = await api.get(`/players/${playerId}/profile.json`);
     console.log('Player profile fetched successfully');
-    
+
     const playerData = response.data;
-    
-    // Extract seasons data
+
+    console.log('Player basic info:', {
+      id: playerData.id,
+      name: playerData.full_name,
+      position: playerData.primary_position,
+      draft_year: playerData.draft?.year
+    });
+
     if (!playerData.seasons || playerData.seasons.length === 0) {
       console.warn('No seasons data found in player profile');
       return null;
     }
-    
-    // Find the most recent regular season (REG) statistics
-    // Sort seasons by year descending to get the most recent first
-    const regularSeasons = playerData.seasons
-      .filter(season => season.type === 'REG')
+
+    const filteredSeasons = playerData.seasons
+      .filter(season => season.type === seasonType)
       .sort((a, b) => b.year - a.year);
-    
-    if (regularSeasons.length === 0) {
-      console.warn('No regular season statistics found');
+
+    if (filteredSeasons.length === 0) {
+      console.warn(`No ${seasonType} season statistics found`);
       return null;
     }
-    
-    const currentSeason = regularSeasons[0];
-    console.log(`Using ${currentSeason.year} regular season statistics`);
-    
-    // Extract statistics from the most recent team in the season
+
+    const currentSeason = filteredSeasons[0];
+    console.log(`Using ${currentSeason.year} ${seasonType} season statistics`);
+
     if (!currentSeason.teams || currentSeason.teams.length === 0) {
       console.warn('No team statistics found for current season');
       return null;
     }
-    
-    // Use the most recent team (last in array)
+
     const currentTeam = currentSeason.teams[currentSeason.teams.length - 1];
-    
-    if (!currentTeam.statistics) {
-      console.warn('No statistics found for current team');
+
+    if (!currentTeam.statistics && !currentTeam.goaltending) {
+      console.warn('No statistics or goaltending data found for current team');
       return null;
     }
-    
-    // Return the statistics in a format that the component expects
+
     return {
       season: currentSeason,
       team: currentTeam,
-      statistics: currentTeam.statistics
+      statistics: currentTeam.statistics || null,
+      goaltending: currentTeam.goaltending || null,
+      time_on_ice: currentTeam.time_on_ice || null
     };
-    
   } catch (error) {
     console.error('Failed to fetch player statistics:', error.response?.status, error.message);
     return null;
@@ -243,5 +359,39 @@ export const getTeamStats = async (teamId) => {
 export const getTeam = (teamId) =>
   api.get(`/teams/${teamId}/profile.json`).then((res) => {
     console.log('Team profile data:', res.data);
+    return res.data;
+  });
+
+// Fetch playoff series schedule
+export const getPlayoffSchedule = (season = SEASON) => {
+  console.log(`🔍 Fetching playoff schedule for season: ${season}`);
+  return api.get(`/series/${season}/PST/schedule.json`).then((res) => {
+    console.log('🏒 Playoff schedule data:', res.data);
+    console.log('🎯 Series count:', res.data?.series?.length || 0);
+    if (res.data?.series) {
+      res.data.series.forEach((series, index) => {
+        console.log(`Series ${index + 1}:`, {
+          title: series.title,
+          round: series.round,
+          status: series.status,
+          participants: series.participants?.map(p => `${p.team.market} ${p.team.name}`) || []
+        });
+      });
+    }
+    return res.data;
+  });
+};
+
+// Fetch series statistics for a specific team
+export const getSeriesStats = (seriesId, teamId) =>
+  api.get(`/series/${seriesId}/teams/${teamId}/statistics.json`).then((res) => {
+    console.log('Series statistics data:', res.data);
+    return res.data;
+  });
+
+// Fetch playoff standings
+export const getPlayoffStandings = (season = SEASON) =>
+  api.get(`/seasons/${season}/PST/standings.json`).then((res) => {
+    console.log('Playoff standings data:', res.data);
     return res.data;
   });

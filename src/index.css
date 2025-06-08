@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #f8fafc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +27,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f8fafc;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 h1 {
@@ -42,7 +43,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.87);
   cursor: pointer;
   transition: border-color 0.25s;
 }

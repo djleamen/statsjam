@@ -10,6 +10,7 @@ import {
   Link as MuiLink
 } from '@mui/material'
 import { SportsHockey, Code, Analytics, Speed } from '@mui/icons-material'
+import Footer from '../components/Footer'
 
 function About() {
   return (
@@ -65,13 +66,25 @@ function About() {
         </Box>
         <Box component="ul" sx={{ pl: 2, mb: 0 }}>
           <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-            Complete NHL team directory with official logos
+            Complete NHL team directory with official logos and team statistics
           </Typography>
           <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-            Detailed player profiles with photos and statistics
+            Detailed player profiles with photos and comprehensive statistics
           </Typography>
           <Typography component="li" variant="body1" sx={{ mb: 1 }}>
-            Real-time season statistics and performance metrics
+            NHL playoff bracket viewer with tournament series tracking
+          </Typography>
+          <Typography component="li" variant="body1" sx={{ mb: 1 }}>
+            Team roster management with player navigation
+          </Typography>
+          <Typography component="li" variant="body1" sx={{ mb: 1 }}>
+            Separate regular season and playoff statistics
+          </Typography>
+          <Typography component="li" variant="body1" sx={{ mb: 1 }}>
+            Position-specific stats display (goalies vs. skaters)
+          </Typography>
+          <Typography component="li" variant="body1" sx={{ mb: 1 }}>
+            Advanced player metrics and performance analytics
           </Typography>
           <Typography component="li" variant="body1" sx={{ mb: 1 }}>
             Responsive design for desktop and mobile devices
@@ -141,24 +154,7 @@ function About() {
         </Grid>
       </Grid>
 
-      {/* Footer */}
-      <Box 
-        sx={{ 
-          mt: 6, 
-          py: 4, 
-          textAlign: 'center',
-          borderTop: '1px solid #e0e0e0',
-          backgroundColor: '#fafafa',
-          borderRadius: 2
-        }}
-      >
-        <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
-          Created for NHL fans who love statistics and clean design
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          © 2025 StatsJam. All rights reserved.
-        </Typography>
-      </Box>
+      <Footer />
     </Container>
   )
 }

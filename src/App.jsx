@@ -4,9 +4,8 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Team from './pages/Team'
 import Player from './pages/Player'
+import PlayoffBracket from './pages/PlayoffBracket'
 import About from './pages/About'
-import Debug from './pages/Debug'
-import SimpleTest from './pages/SimpleTest'
 import './App.css'
 
 function App() {
@@ -18,9 +17,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/team/:teamId" element={<Team />} />
         <Route path="/player/:playerId" element={<Player />} />
+        <Route path="/playoffs" element={<PlayoffBracket />} />
         <Route path="/about" element={<About />} />
-        <Route path="/debug" element={<Debug />} />
-        <Route path="/test" element={<SimpleTest />} />
       </Routes>
     </Router>
   )

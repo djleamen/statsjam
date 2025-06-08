@@ -1,0 +1,208 @@
+/* Playoff Bracket Styles */
+.bracket-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem 0;
+  overflow-x: auto;
+  min-height: 600px;
+}
+
+/* Grid-based bracket layout */
+.bracket-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bracket-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bracket-section.eastern {
+  grid-column: 1 / 4;
+}
+
+.bracket-section.western {
+  grid-column: 5 / 8;
+}
+
+.bracket-section.final {
+  grid-column: 4;
+  align-self: center;
+}
+
+/* Compact card styling */
+.compact-series-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px;
+  background: white;
+  min-height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.compact-series-card.complete {
+  border-color: #4caf50;
+  background: #e8f5e8;
+}
+
+.compact-series-card.live {
+  border-color: #f44336;
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
+}
+
+/* Seed badge styles removed */
+
+/* Team row styling */
+.team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.team-row.winner {
+  background-color: rgba(76, 175, 80, 0.2);
+  font-weight: bold;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.team-score {
+  font-weight: bold;
+  min-width: 16px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+/* Status badges */
+.status-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 0.6rem;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 8px;
+}
+
+.status-badge.live {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-badge.final {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Round labels */
+.round-label {
+  text-align: center;
+  color: #666;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Conference headers */
+.conference-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.conference-title {
+  font-weight: bold;
+  color: #1976d2;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.conference-subtitle {
+  color: #666;
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+/* Stanley Cup Final styling */
+.stanley-cup-final {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.stanley-cup-title {
+  font-weight: bold;
+  color: #000;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .bracket-grid {
+    grid-template-columns: 1fr 0.7fr 0.7fr 1fr 0.7fr 0.7fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .bracket-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .bracket-section.eastern,
+  .bracket-section.western,
+  .bracket-section.final {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .conference-header {
+    margin-bottom: 16px;
+  }
+  
+  .stanley-cup-final {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .compact-series-card {
+    min-height: 60px;
+    padding: 6px;
+  }
+  
+  .team-info {
+    gap: 4px;
+  }
+  
+  .seed-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+  }
+  
+  .team-score {
+    font-size: 0.65rem;
+  }
+}

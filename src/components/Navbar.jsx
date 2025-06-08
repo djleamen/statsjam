@@ -68,6 +68,20 @@ function Navbar() {
         <Button 
           color="inherit" 
           component={Link} 
+          to="/playoffs"
+          sx={{ 
+            fontWeight: 'bold',
+            '&:hover': {
+              backgroundColor: 'rgba(158, 158, 158, 0.2)',
+              color: '#9e9e9e'
+            }
+          }}
+        >
+          Playoffs
+        </Button>
+        <Button 
+          color="inherit" 
+          component={Link} 
           to="/about"
           sx={{ 
             fontWeight: 'bold',

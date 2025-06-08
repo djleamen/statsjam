@@ -1,0 +1,636 @@
+/* Player Page Styles */
+.player-container {
+  max-width: 1200px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.player-back-button {
+  padding: 1.5rem;
+}
+
+.player-back-button .MuiButton-root {
+  background-color: #1976d2;
+  color: white;
+  box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.player-back-button .MuiButton-root:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(25, 118, 210, 0.4);
+}
+
+.player-hero {
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 50%, #64b5f6 100%);
+  padding: 2rem 3rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.player-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.player-avatar-container {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.player-title {
+  font-weight: 800;
+  font-size: 3rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: 1rem;
+}
+
+.player-chips {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.player-chip {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.player-section {
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(25, 118, 210, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.player-section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.player-section-icon {
+  background-color: #1976d2;
+  border-radius: 50%;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-section-icon.info {
+  background-color: #0288d1;
+}
+
+.player-section-icon.success {
+  background-color: #2e7d32;
+}
+
+.player-section-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 2rem;
+}
+
+.player-info-card {
+  border-radius: 12px;
+  border: 1px solid rgba(25, 118, 210, 0.1);
+  height: 100%;
+}
+
+.player-info-card.physical {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.player-info-card.personal {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+}
+
+.player-info-card-content {
+  padding: 1.5rem;
+}
+
+.player-info-card-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.player-info-card-title.primary {
+  color: #1976d2;
+}
+
+.player-info-card-title.secondary {
+  color: #9c27b0;
+}
+
+.player-physical-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.player-physical-stat {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+}
+
+.player-physical-stat-label {
+  color: #666;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.player-physical-stat-value {
+  font-weight: 700;
+  color: #1976d2;
+  font-size: 1.25rem;
+}
+
+.player-personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.player-personal-item {
+}
+
+.player-personal-label {
+  color: #666;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.player-personal-value {
+  font-weight: 600;
+  color: #9c27b0;
+  font-size: 1rem;
+}
+
+.player-stat-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  color: white;
+  background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%) !important; /* Lighter blue background */
+  min-height: 150px; /* Shorter height */
+  display: flex !important; /* Use flexbox for content alignment */
+  flex-direction: column !important;
+  justify-content: center !important; /* Center content vertically */
+  align-items: center !important; /* Center content horizontally */
+}
+
+.player-stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(66, 165, 245, 0.35) !important; /* Adjusted shadow for lighter blue */
+}
+
+.player-stat-card::before {
+  /* content: ""; */ /* Removed shine element */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(20px, -20px);
+}
+
+.player-stat-card-content {
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Commented out old color-specific classes for .player-stat-card
+.player-stat-card.primary {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+}
+
+.player-stat-card.primary:hover {
+  box-shadow: 0 16px 40px rgba(25, 118, 210, 0.3);
+}
+
+.player-stat-card.error {
+  background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+}
+
+.player-stat-card.error:hover {
+  box-shadow: 0 16px 40px rgba(211, 47, 47, 0.3);
+}
+
+.player-stat-card.info {
+  background: linear-gradient(135deg, #0288d1 0%, #0277bd 100%);
+}
+
+.player-stat-card.info:hover {
+  box-shadow: 0 16px 40px rgba(2, 136, 209, 0.3);
+}
+
+.player-stat-card.success {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+}
+
+.player-stat-card.success:hover {
+  box-shadow: 0 16px 40px rgba(46, 125, 50, 0.3);
+}
+*/
+
+/* REMOVE rules for .player-stat-card.games, .goals, .assists, .points and their hovers */
+
+.player-stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.player-stat-label {
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.player-stat-value {
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+.player-enhanced-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.player-table-header {
+  background-color: #f5f5f5;
+}
+
+.player-table-header .MuiTableCell-root {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.player-table-row:hover {
+  background-color: #f5f5f5;
+}
+
+.player-table-cell-bold {
+  font-weight: 600;
+}
+
+.player-table-cell-value {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.player-season-chips {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.player-season-chip {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.player-season-chip.primary {
+  background-color: #1976d2;
+  color: white;
+}
+
+.player-season-chip.secondary {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.playoff-stats-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 1px solid rgba(255, 152, 0, 0.1);
+}
+
+.playoff-stats-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.playoff-stats-icon {
+  background-color: #ff9800;
+  border-radius: 50%;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playoff-stats-title {
+  font-weight: 700;
+  color: #e65100;
+  font-size: 2rem;
+}
+
+/* Additional CSS classes for updated Player.jsx */
+
+/* Back button styles */
+.back-button {
+  background-color: #1976d2 !important;
+  color: white !important;
+  box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3) !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.back-button:hover {
+  background-color: #1565c0 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 24px rgba(25, 118, 210, 0.4) !important;
+}
+
+/* Hero section updates */
+.player-hero-avatar {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.player-hero-name {
+  font-weight: 800 !important;
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  margin-bottom: 1rem !important;
+}
+
+.player-hero-chips {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.player-hero-chip {
+  background-color: #e0e0e0 !important; /* Grey background */
+  color: #000000 !important; /* Black text */
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 0.5rem 0.75rem !important; /* Adjust padding for better appearance */
+  border-radius: 16px !important; /* More rounded bubbles */
+  border: 1px solid rgba(0, 0, 0, 0.1) !important; /* Subtle border */
+}
+
+/* Information section updates */
+.player-info-section {
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(25, 118, 210, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.info-icon {
+  background-color: #0288d1;
+}
+
+/* New Table Styles for Player Information */
+.player-info-table-container {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  margin-top: 1rem; /* Add some space above the table */
+}
+
+.player-info-table .MuiTableHead-root {
+  background-color: #f5f5f5 !important; /* Light grey header */
+}
+
+.player-info-table .MuiTableCell-head {
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  color: #333 !important;
+}
+
+.player-info-table-row:nth-of-type(even) {
+  background-color: #fafafa !important; /* Zebra striping for rows */
+}
+
+.player-info-table-row:hover {
+  background-color: #f0f0f0 !important; /* Hover effect for rows */
+}
+
+.player-info-table-cell-label {
+  font-weight: 600 !important;
+  color: #555 !important;
+  width: 20%; /* Adjust width as needed */
+}
+
+.player-info-table-cell-value {
+  font-weight: 500 !important;
+  color: #2c3e50 !important;
+  width: 30%; /* Adjust width as needed */
+}
+
+
+/* Statistics section updates */
+.player-stats-section {
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(25, 118, 210, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.stats-icon {
+  background-color: #2e7d32;
+}
+
+.player-stats-chips {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.player-stats-chip.primary {
+  background-color: #1976d2 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+.player-stats-chip.secondary {
+  background-color: #9c27b0 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+.player-stats-cards {
+  margin-bottom: 2rem;
+}
+
+.player-stat-card-content {
+  padding: 1.5rem !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+.player-stat-card-label {
+  opacity: 0.8 !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 500 !important;
+}
+
+.player-stat-card-value {
+  font-weight: 800 !important;
+}
+
+.player-stats-table {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.player-stats-table-header {
+  background-color: #f5f5f5 !important;
+}
+
+.player-stats-table-header-cell {
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+
+.player-stats-table-row:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.player-stats-table-cell {
+  font-weight: 600 !important;
+}
+
+.player-stats-table-value {
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+/* Playoff section */
+.player-playoff-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 1px solid rgba(255, 152, 0, 0.1);
+}
+
+.playoff-icon {
+  background-color: #ff9800;
+}
+
+.player-playoff-info {
+  border-radius: 12px !important;
+}
+
+.player-playoff-info .MuiAlert-message {
+  font-size: 1rem !important;
+}
+
+.player-playoff-info-title {
+  font-weight: 600 !important;
+}
+
+.player-stats-no-data {
+  border-radius: 12px !important;
+}
+
+.player-stats-no-data .MuiAlert-message {
+  font-size: 1rem !important;
+}
+
+.player-stats-no-data-title {
+  font-weight: 600 !important;
+}
+
+/* Mobile responsiveness updates */
+@media (max-width: 768px) {
+  .player-container {
+    margin-top: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .player-back-button {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-bottom: 1rem !important;
+    padding: 0 !important;
+  }
+  
+  .player-hero {
+    padding: 1.5rem !important;
+  }
+  
+  .player-hero-content {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+  
+  .player-hero-name {
+    font-size: 2rem !important;
+  }
+  
+  .player-info-section,
+  .player-stats-section,
+  .player-playoff-section {
+    padding: 1.5rem !important;
+  }
+  
+  .player-section-title {
+    font-size: 1.5rem !important;
+  }
+}

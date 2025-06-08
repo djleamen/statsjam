@@ -6,9 +6,15 @@ StatsJam is a modern, responsive web application designed to provide fellow NHL 
 
 ## 🏒 Features
 
-- **Complete NHL team directory** with official logos
-- **Detailed player profiles** with photos and statistics
-- **Real-time season statistics** and performance metrics
+- **Complete NHL team directory** with official logos and team statistics
+- **Detailed player profiles** with photos and comprehensive statistics  
+- **NHL playoff bracket viewer** with tournament series tracking
+- **Team roster management** with player navigation and detailed roster cards
+- **Separate regular season and playoff statistics** for complete player analysis
+- **Position-specific stats display** - tailored metrics for goalies vs. skaters
+- **Advanced player metrics** and performance analytics
+- **Team statistics dashboard** with comprehensive performance metrics
+- **Smart navigation** between teams, players, and playoff data
 - **Responsive design** for desktop and mobile devices
 - **Fast, modern interface** built with React and Material-UI
 
@@ -68,10 +74,12 @@ yarn dev
 
 ## 📱 Usage
 
-- Browse the complete list of NHL teams
-- Click on any team to view roster and team statistics
-- View detailed player profiles with performance metrics
-- Explore current season statistics for teams and players
+- **Browse teams** - View the complete list of NHL teams with logos and basic info
+- **Team details** - Click on any team to view roster, statistics, and team performance
+- **Player profiles** - Click on any player to see detailed stats, photos, and career information
+- **Playoff bracket** - Navigate to the Playoffs section to view tournament brackets and series
+- **Season data** - Access both regular season and playoff statistics where available
+- **Responsive design** - Enjoy the same experience on desktop, tablet, or mobile devices
 
 ## 📝 License
 
