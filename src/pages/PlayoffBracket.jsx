@@ -1,4 +1,3 @@
-// src/pages/PlayoffBracket.jsx
 import React, { useState, useEffect } from 'react';
 import { getPlayoffSchedule, getPlayoffStandings } from '../api/nhl';
 import {
@@ -21,7 +20,6 @@ import '../styles/PlayoffBracket.css';
 
 const PlayoffBracket = () => {
   const [schedule, setSchedule] = useState(null);
-  const [standings, setStandings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,7 +31,6 @@ const PlayoffBracket = () => {
         // Try multiple season years since we're not sure which one has the current playoffs
         const seasonsToTry = ['2024', '2025', '2023'];
         let scheduleData = null;
-        let standingsData = null;
         
         for (const season of seasonsToTry) {
           try {
@@ -54,15 +51,13 @@ const PlayoffBracket = () => {
         // Try to get standings for the same season
         if (scheduleData) {
           try {
-            standingsData = await getPlayoffStandings();
-            console.log('✅ Playoff standings loaded:', standingsData);
+            await getPlayoffStandings();
+            console.log('✅ Playoff standings loaded');
           } catch (err) {
             console.warn('⚠️ Failed to load playoff standings:', err.message);
           }
-        }
-
+        }        
         setSchedule(scheduleData);
-        setStandings(standingsData);
         setLoading(false);
         
       } catch (err) {
@@ -107,12 +102,7 @@ const PlayoffBracket = () => {
     const team1Wins = series.win_count?.team1 || 0;
     const team2Wins = series.win_count?.team2 || 0;
     const isSeriesComplete = series.status === 'closed' || series.status === 'complete';
-    const isSeriesActive = series.status === 'inprogress';
     const winner = isSeriesComplete ? (team1Wins > team2Wins ? team1 : team2) : null;
-
-    // Get latest completed game for current score display
-    const completedGames = series.games?.filter(game => game.status === 'closed') || [];
-    const latestGame = completedGames[completedGames.length - 1];
 
     return (
       <Paper 
@@ -353,8 +343,6 @@ const PlayoffBracket = () => {
               <CompactSeriesCard 
                 key={index} 
                 series={series} 
-                seed={series ? (index < 2 ? index + 1 : index + 3) : null}
-                conference="western"
               />
             ))}
           </Box>
@@ -372,7 +360,7 @@ const PlayoffBracket = () => {
               Divisional
             </Typography>
             {(westernSecondRound.length > 0 ? westernSecondRound : Array(2).fill(null)).slice(0, 2).map((series, index) => (
-              <CompactSeriesCard key={index} series={series} conference="western" />
+              <CompactSeriesCard key={index} series={series} />
             ))}
           </Box>
 
@@ -389,9 +377,9 @@ const PlayoffBracket = () => {
               Conference Final
             </Typography>
             {westernConferenceFinal.length > 0 ? (
-              <CompactSeriesCard series={westernConferenceFinal[0]} conference="western" />
+              <CompactSeriesCard series={westernConferenceFinal[0]} />
             ) : (
-              <CompactSeriesCard series={null} conference="western" />
+              <CompactSeriesCard series={null} />
             )}
           </Box>
 
@@ -428,9 +416,9 @@ const PlayoffBracket = () => {
               Conference Final
             </Typography>
             {easternConferenceFinal.length > 0 ? (
-              <CompactSeriesCard series={easternConferenceFinal[0]} conference="eastern" />
+              <CompactSeriesCard series={easternConferenceFinal[0]} />
             ) : (
-              <CompactSeriesCard series={null} conference="eastern" />
+              <CompactSeriesCard series={null} />
             )}
           </Box>
 
@@ -447,7 +435,7 @@ const PlayoffBracket = () => {
               Divisional
             </Typography>
             {(easternSecondRound.length > 0 ? easternSecondRound : Array(2).fill(null)).slice(0, 2).map((series, index) => (
-              <CompactSeriesCard key={index} series={series} conference="eastern" />
+              <CompactSeriesCard key={index} series={series} />
             ))}
           </Box>
 
@@ -467,8 +455,6 @@ const PlayoffBracket = () => {
               <CompactSeriesCard 
                 key={index} 
                 series={series} 
-                seed={series ? (index < 2 ? index + 1 : index + 3) : null}
-                conference="eastern"
               />
             ))}
           </Box>
@@ -478,7 +464,7 @@ const PlayoffBracket = () => {
   };
 
   // Compact series card for the grid layout
-  const CompactSeriesCard = ({ series, seed, isFinal = false, conference = null }) => {
+  const CompactSeriesCard = ({ series, isFinal = false }) => {
     const team1 = series?.teams?.[0];
     const team2 = series?.teams?.[1];
     
@@ -509,8 +495,6 @@ const PlayoffBracket = () => {
     const isSeriesActive = series.status === 'inprogress';
     const winner = isSeriesComplete ? (team1Wins > team2Wins ? team1 : team2) : null;
 
-    // Conference-based styling
-    const conferenceColor = conference === 'eastern' ? '#1565c0' : conference === 'western' ? '#c62828' : '#1976d2';
     const borderColor = isSeriesComplete ? '#4caf50' : isSeriesActive ? '#ff5722' : '#e0e0e0';
     const backgroundColor = isSeriesComplete ? '#e8f5e8' : isSeriesActive ? '#fff3e0' : '#ffffff';
 

@@ -31,7 +31,7 @@ function Player() {
   const { playerId } = useParams()
   const [player, setPlayer] = useState(null)
   const [stats, setStats] = useState(null)
-  const [playoffStats, setPlayoffStats] = useState(null) // New state for playoff stats
+  const [playoffStats, setPlayoffStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -49,7 +49,7 @@ function Player() {
         
         // Try to fetch player statistics
         try {
-          const statsData = await getPlayerStats(playerId, 'REG'); // Explicitly REG for regular season
+          const statsData = await getPlayerStats(playerId, 'REG');
           console.log('Player regular season stats data:', statsData);
           setStats(statsData);
         } catch (statsError) {
@@ -500,7 +500,7 @@ function Player() {
         <Paper 
           elevation={0} 
           className="player-playoff-section"
-          sx={{ mt: 4 }} // Add margin top to separate from previous section
+          sx={{ mt: 4 }}
         >
           <Box className="player-section-header">
             <Box className="player-section-icon playoff-icon">
@@ -743,7 +743,7 @@ function Player() {
         <Paper 
           elevation={0} 
           className="player-playoff-section"
-          sx={{ mt: 4 }} // Add margin top to separate
+          sx={{ mt: 4 }}
         >
           <Box className="player-section-header">
             <Box className="player-section-icon playoff-icon">

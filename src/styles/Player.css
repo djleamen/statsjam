@@ -187,9 +187,6 @@
   gap: 1rem;
 }
 
-.player-personal-item {
-}
-
 .player-personal-label {
   color: #666;
   font-weight: 600;
@@ -209,21 +206,20 @@
   position: relative;
   transition: all 0.3s ease;
   color: white;
-  background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%) !important; /* Lighter blue background */
-  min-height: 150px; /* Shorter height */
-  display: flex !important; /* Use flexbox for content alignment */
+  background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%) !important;
+  min-height: 150px;
+  display: flex !important;
   flex-direction: column !important;
-  justify-content: center !important; /* Center content vertically */
-  align-items: center !important; /* Center content horizontally */
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .player-stat-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(66, 165, 245, 0.35) !important; /* Adjusted shadow for lighter blue */
+  box-shadow: 0 10px 20px rgba(66, 165, 245, 0.35) !important;
 }
 
 .player-stat-card::before {
-  /* content: ""; */ /* Removed shine element */
   position: absolute;
   top: 0;
   right: 0;
@@ -239,42 +235,6 @@
   text-align: center;
   position: relative;
 }
-
-/* Commented out old color-specific classes for .player-stat-card
-.player-stat-card.primary {
-  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-}
-
-.player-stat-card.primary:hover {
-  box-shadow: 0 16px 40px rgba(25, 118, 210, 0.3);
-}
-
-.player-stat-card.error {
-  background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
-}
-
-.player-stat-card.error:hover {
-  box-shadow: 0 16px 40px rgba(211, 47, 47, 0.3);
-}
-
-.player-stat-card.info {
-  background: linear-gradient(135deg, #0288d1 0%, #0277bd 100%);
-}
-
-.player-stat-card.info:hover {
-  box-shadow: 0 16px 40px rgba(2, 136, 209, 0.3);
-}
-
-.player-stat-card.success {
-  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-}
-
-.player-stat-card.success:hover {
-  box-shadow: 0 16px 40px rgba(46, 125, 50, 0.3);
-}
-*/
-
-/* REMOVE rules for .player-stat-card.games, .goals, .assists, .points and their hovers */
 
 .player-stat-icon {
   font-size: 2rem;
@@ -374,7 +334,6 @@
 
 /* Additional CSS classes for updated Player.jsx */
 
-/* Back button styles */
 .back-button {
   background-color: #1976d2 !important;
   color: white !important;
@@ -391,7 +350,6 @@
   box-shadow: 0 12px 24px rgba(25, 118, 210, 0.4) !important;
 }
 
-/* Hero section updates */
 .player-hero-avatar {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
@@ -415,16 +373,15 @@
 }
 
 .player-hero-chip {
-  background-color: #e0e0e0 !important; /* Grey background */
-  color: #000000 !important; /* Black text */
+  background-color: #e0e0e0 !important;
+  color: #000000 !important;
   font-weight: 600 !important;
   font-size: 0.9rem !important;
-  padding: 0.5rem 0.75rem !important; /* Adjust padding for better appearance */
-  border-radius: 16px !important; /* More rounded bubbles */
-  border: 1px solid rgba(0, 0, 0, 0.1) !important; /* Subtle border */
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Information section updates */
 .player-info-section {
   padding: 2rem;
   border-radius: 16px;
@@ -438,15 +395,14 @@
   background-color: #0288d1;
 }
 
-/* New Table Styles for Player Information */
 .player-info-table-container {
   border-radius: 12px !important;
   overflow: hidden !important;
-  margin-top: 1rem; /* Add some space above the table */
+  margin-top: 1rem;
 }
 
 .player-info-table .MuiTableHead-root {
-  background-color: #f5f5f5 !important; /* Light grey header */
+  background-color: #f5f5f5 !important;
 }
 
 .player-info-table .MuiTableCell-head {
@@ -456,27 +412,26 @@
 }
 
 .player-info-table-row:nth-of-type(even) {
-  background-color: #fafafa !important; /* Zebra striping for rows */
+  background-color: #fafafa !important;
 }
 
 .player-info-table-row:hover {
-  background-color: #f0f0f0 !important; /* Hover effect for rows */
+  background-color: #f0f0f0 !important;
 }
 
 .player-info-table-cell-label {
   font-weight: 600 !important;
   color: #555 !important;
-  width: 20%; /* Adjust width as needed */
+  width: 20%;
 }
 
 .player-info-table-cell-value {
   font-weight: 500 !important;
   color: #2c3e50 !important;
-  width: 30%; /* Adjust width as needed */
+  width: 30%;
 }
 
 
-/* Statistics section updates */
 .player-stats-section {
   padding: 2rem;
   border-radius: 16px;
@@ -558,7 +513,6 @@
   font-size: 1.1rem !important;
 }
 
-/* Playoff section */
 .player-playoff-section {
   margin-top: 2rem;
   padding: 2rem;

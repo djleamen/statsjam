@@ -1,19 +1,14 @@
-// src/components/TeamLogo.jsx
 import React from 'react';
 import { Avatar } from '@mui/material';
 
-// Team logo URLs - using ESPN's reliable CDN
 const getTeamLogoUrl = (teamAlias) => {
   if (!teamAlias) return null;
   
-  // Convert team alias to lowercase for consistent URL formatting
   const alias = teamAlias.toLowerCase();
   
-  // ESPN uses these logo URLs with good reliability
   return `https://a.espncdn.com/i/teamlogos/nhl/500/${alias}.png`;
 };
 
-// Team colors mapping for better visual presentation
 const teamColors = {
   'ANA': '#F47A38',
   'ARI': '#8C2633',

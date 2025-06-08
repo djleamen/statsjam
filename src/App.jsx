@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Toolbar /> {/* This creates spacing for the fixed navbar */}
+      <Toolbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/team/:teamId" element={<Team />} />

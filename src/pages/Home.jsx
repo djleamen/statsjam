@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect } from 'react'
 import { getTeams } from '../api/nhl'
 import { 

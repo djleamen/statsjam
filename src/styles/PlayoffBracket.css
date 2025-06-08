@@ -9,7 +9,6 @@
   min-height: 600px;
 }
 
-/* Grid-based bracket layout */
 .bracket-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -59,9 +58,6 @@
   box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
 }
 
-/* Seed badge styles removed */
-
-/* Team row styling */
 .team-row {
   display: flex;
   align-items: center;

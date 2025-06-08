@@ -1,4 +1,3 @@
-// src/api/nhl.js
 import axios from 'axios';
 
 // Configure Sportradar API client
@@ -14,7 +13,7 @@ const baseURL = import.meta.env.DEV
 const api = axios.create({
   baseURL: baseURL,
   params: { api_key: API_KEY },
-  timeout: 10000, // 10 second timeout
+  timeout: 10000,
   headers: {
     'Accept': 'application/json',
     'User-Agent': 'StatsJam/1.0'
@@ -53,21 +52,7 @@ api.interceptors.response.use(
   }
 );
 
-// Test API connectivity
-export const testAPI = () => {
-  console.log('Testing API with key:', API_KEY ? 'Present' : 'Missing');
-  console.log('Base URL:', api.defaults.baseURL);
-  console.log('Environment:', import.meta.env.DEV ? 'Development' : 'Production');
-  return api.get('/league/teams.json')
-    .then(response => {
-      console.log('API Test Success:', response.status);
-      return response;
-    })
-    .catch(error => {
-      console.error('API Test Failed:', error);
-      throw error;
-    });
-};
+
 
 // Mock data for development when API is unavailable
 const mockTeams = [

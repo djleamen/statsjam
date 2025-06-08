@@ -1,4 +1,3 @@
-// src/pages/About.jsx
 import React from 'react'
 import {
   Container,
