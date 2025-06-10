@@ -316,7 +316,7 @@ export const getTeamStats = async (teamId) => {
     try {
       console.log(`Trying endpoint: ${endpoint}`);
       const response = await api.get(endpoint);
-      console.log(`SUCCESS! Response from ${endpoint}:`, response.data);
+      console.log('SUCCESS! Response from %s:', endpoint, response.data);
       
       // If it's standings data, extract the team's stats
       if (endpoint.includes('standings')) {
