@@ -332,7 +332,7 @@ export const getTeamStats = async (teamId) => {
       
       return response.data;
     } catch (error) {
-      console.log('Failed %s: %s %s', endpoint, error.response?.status, error.message);
+      console.log(`Failed ${endpoint}:`, error.response?.status, error.message);
     }
   }
   
