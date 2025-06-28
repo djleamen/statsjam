@@ -1,5 +1,12 @@
 # StatsJam - NHL Statistics Hub
 
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![React](https://img.shields.io/badge/React-19-blue)
+![Material UI](https://img.shields.io/badge/Material--UI-7-purple)
+![Vite](https://img.shields.io/badge/Built%20with-Vite-yellow)
+![API](https://img.shields.io/badge/API-SportRadar-orange)
+![Last Commit](https://img.shields.io/github/last-commit/djleamen/statsjam)
+
 StatsJam is a modern, responsive web application designed to provide fellow NHL fans with comprehensive team and player statistics in an intuitive interface. Whether you're a die-hard fan or just curious about the latest stats, StatsJam has you covered.
 
 ![StatsJam Logo](/public/logo-wide.png)
