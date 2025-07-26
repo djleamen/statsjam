@@ -1,7 +1,0 @@
-frontend:
-  - 'src/components/**'
-  - 'src/pages/**'
-  - 'src/styles/**'
-  - 'src/**'
-backend:
-  - 'src/api/**'
