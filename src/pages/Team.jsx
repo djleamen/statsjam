@@ -15,16 +15,13 @@ import {
   TableRow,
   Box,
   Chip,
-  Avatar,
   Paper,
   TableHead,
   TableContainer,
   Alert,
   Button,
-  Divider,
-  IconButton
 } from '@mui/material'
-import { ArrowBack, Person, Sports, TrendingUp, Group, Star, EmojiEvents } from '@mui/icons-material'
+import { ArrowBack, TrendingUp, Group, Star, EmojiEvents } from '@mui/icons-material'
 import TeamLogo from '../components/TeamLogo'
 import PlayerAvatar from '../components/PlayerAvatar'
 import Footer from '../components/Footer'

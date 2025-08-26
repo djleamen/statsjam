@@ -168,7 +168,7 @@ export const getTeams = async () => {
     
     const mappedTeams = nhlTeams.map((t) => {
       let standardizedConferenceName = null;
-      if (t.conference && t.conference.name) {
+      if (t.conference?.name) {
         const apiConfNameLower = t.conference.name.toLowerCase();
         if (apiConfNameLower.includes('eastern')) {
           standardizedConferenceName = 'Eastern Conference';

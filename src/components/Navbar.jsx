@@ -1,7 +1,6 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
+import { AppBar, Toolbar, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { SportsHockey } from '@mui/icons-material'
 
 function Navbar() {
   return (

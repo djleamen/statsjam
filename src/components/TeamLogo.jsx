@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar } from '@mui/material';
 
 const getTeamLogoUrl = (teamAlias) => {
@@ -69,3 +70,13 @@ const TeamLogo = ({ team, size = 70, showFallback = true }) => {
 };
 
 export default TeamLogo;
+
+TeamLogo.propTypes = {
+  team: PropTypes.shape({
+    alias: PropTypes.string,
+    market: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
+  size: PropTypes.number,
+  showFallback: PropTypes.bool,
+};

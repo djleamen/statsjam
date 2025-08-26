@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom'
 import TeamLogo from '../components/TeamLogo'
 import Footer from '../components/Footer'
 
+import PropTypes from 'prop-types';
 // TeamCard component for displaying individual team cards
 const TeamCard = ({ team }) => {
   return (
@@ -159,6 +160,15 @@ const TeamCard = ({ team }) => {
       </CardActionArea>
     </Card>
   );
+};
+
+TeamCard.propTypes = {
+  team: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    alias: PropTypes.string,
+    market: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 function Home() {
