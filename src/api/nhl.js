@@ -130,14 +130,17 @@ export const getTeams = async () => {
     const response = await api.get('/league/teams.json');
     console.log('✅ API Response received:', response.status);
     console.log('🔍 Raw teams data:', response.data.teams);
-    
+
+    // Guard against unexpected response shapes (e.g. missing teams array)
+    const teams = Array.isArray(response.data?.teams) ? response.data.teams : [];
+
     // Log team structure to understand the data
-    if (response.data.teams && response.data.teams.length > 0) {
-      console.log('📊 Sample team structure:', response.data.teams[0]);
+    if (teams.length > 0) {
+      console.log('📊 Sample team structure:', teams[0]);
     }
-    
+
     // Filter out non-NHL teams based on known patterns
-    const nhlTeams = response.data.teams.filter(team => {
+    const nhlTeams = teams.filter(team => {
       // Filter out national teams
       const nationalTeams = ['Team Canada', 'Team Finland', 'Team Sweden', 'Team USA', 'Team Czech Republic'];
       if (nationalTeams.includes(`${team.market} ${team.name}`) || 
