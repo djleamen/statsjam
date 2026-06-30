@@ -199,11 +199,13 @@ export const getTeams = async () => {
     return mappedTeams;
     
   } catch (error) {
+    // Log only safe fields. error.config/request/response carry the request
+    // params (including api_key), so dumping them would leak the key to the
+    // browser console.
     console.error('❌ API Error Details:', {
       message: error.message,
-      response: error.response,
-      request: error.request,
-      config: error.config
+      status: error.response?.status,
+      code: error.code
     });
     
     // Check if it's a network error and we're in development
