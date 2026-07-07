@@ -14,10 +14,10 @@ export default defineConfig({
             console.log('proxy error', err);
           });
           proxy.on('proxyReq', (proxyReq, req) => {
-            console.log('Sending Request to the Target:', req.method, req.url);
+            console.log('Sending Request to the Target:', req.method, req.url.split('?')[0]);
           });
           proxy.on('proxyRes', (proxyRes, req) => {
-            console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+            console.log('Received Response from the Target:', proxyRes.statusCode, req.url.split('?')[0]);
           });
         },
       }
