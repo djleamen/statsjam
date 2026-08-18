@@ -223,7 +223,7 @@ export const getTeams = async () => {
 
 // Fetch team roster
 export const getTeamRoster = (teamId) =>
-  api.get(`/teams/${teamId}/profile.json`).then((res) => {
+  api.get(`/teams/${encodeURIComponent(teamId)}/profile.json`).then((res) => {
     console.log('Team roster data structure:', res.data);
     const players = res.data.players || [];
     console.log('Number of players in roster:', players.length);
@@ -235,14 +235,14 @@ export const getTeamRoster = (teamId) =>
 
 // Fetch player profile
 export const getPlayer = (playerId) =>
-  api.get(`/players/${playerId}/profile.json`).then((res) => res.data);
+  api.get(`/players/${encodeURIComponent(playerId)}/profile.json`).then((res) => res.data);
 
 // Fetch player season statistics
 export const getPlayerStats = async (playerId, seasonType = 'REG') => {
   console.log(`Fetching player stats for: ${playerId}, season type: ${seasonType}`);
 
   try {
-    const response = await api.get(`/players/${playerId}/profile.json`);
+    const response = await api.get(`/players/${encodeURIComponent(playerId)}/profile.json`);
     console.log('Player profile fetched successfully');
 
     const playerData = response.data;
@@ -300,17 +300,20 @@ export const getPlayerStats = async (playerId, seasonType = 'REG') => {
 export const getTeamStats = async (teamId) => {
   console.log('Fetching team stats for:', teamId);
   
+  // Encode the id once so a crafted value can't alter the request path
+  const safeTeamId = encodeURIComponent(teamId);
+
   // Try different endpoints that might have statistics
   const endpoints = [
     // Season-specific endpoints
-    `/seasons/2024/REG/teams/${teamId}/statistics.json`,
-    `/seasons/2025/REG/teams/${teamId}/statistics.json`,
-    `/seasons/2023/REG/teams/${teamId}/statistics.json`,
-    `/seasons/2024/PST/teams/${teamId}/statistics.json`,
-    
+    `/seasons/2024/REG/teams/${safeTeamId}/statistics.json`,
+    `/seasons/2025/REG/teams/${safeTeamId}/statistics.json`,
+    `/seasons/2023/REG/teams/${safeTeamId}/statistics.json`,
+    `/seasons/2024/PST/teams/${safeTeamId}/statistics.json`,
+
     // Team-specific endpoints
-    `/teams/${teamId}/statistics.json`,
-    `/teams/${teamId}/profile.json`,
+    `/teams/${safeTeamId}/statistics.json`,
+    `/teams/${safeTeamId}/profile.json`,
     
     // League-wide endpoints that might include team stats
     `/seasons/2024/REG/standings.json`,
@@ -347,7 +350,7 @@ export const getTeamStats = async (teamId) => {
 
 // Fetch team profile and stats
 export const getTeam = (teamId) =>
-  api.get(`/teams/${teamId}/profile.json`).then((res) => {
+  api.get(`/teams/${encodeURIComponent(teamId)}/profile.json`).then((res) => {
     console.log('Team profile data:', res.data);
     return res.data;
   });
@@ -355,7 +358,7 @@ export const getTeam = (teamId) =>
 // Fetch playoff series schedule
 export const getPlayoffSchedule = (season = SEASON) => {
   console.log(`🔍 Fetching playoff schedule for season: ${season}`);
-  return api.get(`/series/${season}/PST/schedule.json`).then((res) => {
+  return api.get(`/series/${encodeURIComponent(season)}/PST/schedule.json`).then((res) => {
     console.log('🏒 Playoff schedule data:', res.data);
     console.log('🎯 Series count:', res.data?.series?.length || 0);
     if (res.data?.series) {
@@ -374,14 +377,14 @@ export const getPlayoffSchedule = (season = SEASON) => {
 
 // Fetch series statistics for a specific team
 export const getSeriesStats = (seriesId, teamId) =>
-  api.get(`/series/${seriesId}/teams/${teamId}/statistics.json`).then((res) => {
+  api.get(`/series/${encodeURIComponent(seriesId)}/teams/${encodeURIComponent(teamId)}/statistics.json`).then((res) => {
     console.log('Series statistics data:', res.data);
     return res.data;
   });
 
 // Fetch playoff standings
 export const getPlayoffStandings = (season = SEASON) =>
-  api.get(`/seasons/${season}/PST/standings.json`).then((res) => {
+  api.get(`/seasons/${encodeURIComponent(season)}/PST/standings.json`).then((res) => {
     console.log('Playoff standings data:', res.data);
     return res.data;
   });
