@@ -109,7 +109,14 @@ function Player() {
   // Helper render functions to reduce complexity and avoid nested ternaries
   const getPlayerAge = (birthdate) => {
     if (!birthdate) return 0;
-    return new Date().getFullYear() - new Date(birthdate).getFullYear();
+    const today = new Date();
+    const birth = new Date(birthdate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
   };
 
   const getPlusMinus = (pm) => {
