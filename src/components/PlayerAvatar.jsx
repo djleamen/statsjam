@@ -9,7 +9,7 @@ const getPlayerPhotoUrl = (playerId, teamAlias) => {
   const season = '20242025';
   const team = teamAlias ? teamAlias.toUpperCase() : 'NHL';
   
-  return `https://assets.nhle.com/mugs/nhl/${season}/${team}/${playerId}.png`;
+  return `https://assets.nhle.com/mugs/nhl/${season}/${encodeURIComponent(team)}/${encodeURIComponent(playerId)}.png`;
 };
 
 const PlayerAvatar = ({ player, size = 40, showFallback = true }) => {

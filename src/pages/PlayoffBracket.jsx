@@ -72,11 +72,12 @@ function getSeriesData(series) {
   if (isSeriesComplete) {
     if (team1Wins > team2Wins) {
       winner = series.teams[0];
-    } else {
+    } else if (team2Wins > team1Wins) {
       winner = series.teams[1];
     }
+    // Equal win counts (e.g. missing data) leave winner null so no team is falsely highlighted.
   }
-  
+
   return {
     team1Wins,
     team2Wins,
@@ -477,9 +478,10 @@ function getSeriesStatus(series) {
   if (isSeriesComplete) {
     if (team1Wins > team2Wins) {
       winner = series.teams[0];
-    } else {
+    } else if (team2Wins > team1Wins) {
       winner = series.teams[1];
     }
+    // Equal win counts (e.g. missing data) leave winner null so no team is falsely highlighted.
   }
 
   return {
