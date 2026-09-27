@@ -120,7 +120,7 @@ function Player() {
   };
 
   const getPlusMinus = (pm) => {
-    if (pm === undefined) return 0;
+    if (pm === undefined || pm === null) return 0;
     if (pm >= 0) return `+${pm}`;
     return pm;
   };
