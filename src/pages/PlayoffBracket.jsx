@@ -233,8 +233,8 @@ function BracketLayout({ groupedSeries }) {
     const stanleyCupFinal = groupedSeries['Stanley Cup Final'] || [];
 
     // Enhanced conference team mapping for better organization
-    const easternTeams = ['FLA', 'CAR', 'WSH', 'TOR', 'TB', 'NJ', 'MTL', 'OTT', 'NYR', 'NYI', 'PHI', 'PIT', 'BOS', 'BUF', 'DET', 'CBJ'];
-    const westernTeams = ['EDM', 'DAL', 'WPG', 'STL', 'COL', 'LA', 'VGK', 'MIN', 'VAN', 'CGY', 'SEA', 'SJ', 'ANA', 'ARI', 'CHI', 'NSH'];
+    const easternTeams = ['FLA', 'CAR', 'WSH', 'TOR', 'TBL', 'NJD', 'MTL', 'OTT', 'NYR', 'NYI', 'PHI', 'PIT', 'BOS', 'BUF', 'DET', 'CBJ'];
+    const westernTeams = ['EDM', 'DAL', 'WPG', 'STL', 'COL', 'LAK', 'VGK', 'MIN', 'VAN', 'CGY', 'SEA', 'SJS', 'ANA', 'ARI', 'CHI', 'NSH'];
 
     // Split first round by conference using team aliases
     const easternFirstRound = firstRound.filter(series => {
@@ -742,8 +742,8 @@ function PlayoffBracket() {
           seed: participant.seed,
         }));
         series.win_count = {
-          team1: series.participants[0].record || 0,
-          team2: series.participants[1].record || 0,
+          team1: Number(series.participants[0].record) || 0,
+          team2: Number(series.participants[1].record) || 0,
         };
       }
       let roundName;
