@@ -45,17 +45,30 @@ const teamColors = {
   'WPG': '#041E42'
 };
 
+const fontSizeForSize = (value) => (value < 50 ? '1rem' : '1.5rem');
+
 const TeamLogo = ({ team, size = 70, showFallback = true }) => {
   const logoUrl = getTeamLogoUrl(team.alias);
   const teamColor = teamColors[team.alias] || '#1976d2';
-  
+
+  // ``size`` may be a plain number or an MUI responsive object
+  // (e.g. { xs: 14, sm: 16 }). Derive the fallback-text fontSize per
+  // breakpoint for the object form, otherwise ``object < 50`` is always false
+  // and the text never scales down for small avatars.
+  const fontSize =
+    size && typeof size === 'object'
+      ? Object.fromEntries(
+          Object.entries(size).map(([bp, value]) => [bp, fontSizeForSize(value)])
+        )
+      : fontSizeForSize(size);
+
   return (
     <Avatar
       sx={{
         bgcolor: showFallback ? 'rgba(255,255,255,0.9)' : 'transparent',
         width: size,
         height: size,
-        fontSize: size < 50 ? '1rem' : '1.5rem',
+        fontSize,
         fontWeight: 'bold',
         color: teamColor,
         border: showFallback ? `2px solid ${teamColor}` : 'none',
@@ -77,6 +90,6 @@ TeamLogo.propTypes = {
     market: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
-  size: PropTypes.number,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   showFallback: PropTypes.bool,
 };
