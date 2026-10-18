@@ -234,7 +234,7 @@ function BracketLayout({ groupedSeries }) {
 
     // Enhanced conference team mapping for better organization
     const easternTeams = ['FLA', 'CAR', 'WSH', 'TOR', 'TBL', 'NJD', 'MTL', 'OTT', 'NYR', 'NYI', 'PHI', 'PIT', 'BOS', 'BUF', 'DET', 'CBJ'];
-    const westernTeams = ['EDM', 'DAL', 'WPG', 'STL', 'COL', 'LAK', 'VGK', 'MIN', 'VAN', 'CGY', 'SEA', 'SJS', 'ANA', 'ARI', 'CHI', 'NSH'];
+    const westernTeams = ['EDM', 'DAL', 'WPG', 'STL', 'COL', 'LAK', 'VGK', 'MIN', 'VAN', 'CGY', 'SEA', 'SJS', 'ANA', 'UTA', 'CHI', 'NSH'];
 
     // Split first round by conference using team aliases
     const easternFirstRound = firstRound.filter(series => {

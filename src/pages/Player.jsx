@@ -373,7 +373,7 @@ function Player() {
                   <CardContent className="player-stat-card-content">
                     <Sports sx={{ fontSize: 32, mb: 1, opacity: 0.9 }} />
                     <Typography variant="body2" className="player-stat-card-label">Games</Typography>
-                    <Typography variant="h3" className="player-stat-card-value">{stats.statistics?.total?.games_played || 0}</Typography>
+                    <Typography variant="h3" className="player-stat-card-value">{(isGoalie(player) ? stats.goaltending?.total?.games_played : stats.statistics?.total?.games_played) || 0}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -436,7 +436,7 @@ function Player() {
                 <CardContent className="player-stat-card-content">
                   <Sports sx={{ fontSize: 32, mb: 1, opacity: 0.9 }} />
                   <Typography variant="body2" className="player-stat-card-label">Games</Typography>
-                  <Typography variant="h3" className="player-stat-card-value">{playoffStats.statistics?.total?.games_played || 0}</Typography>
+                  <Typography variant="h3" className="player-stat-card-value">{(isGoalie(player) ? playoffStats.goaltending?.total?.games_played : playoffStats.statistics?.total?.games_played) || 0}</Typography>
                 </CardContent>
               </Card>
             </Grid>
